@@ -1,8 +1,6 @@
 #![allow(unused_imports)]
 #![allow(unused_macros)]
 
-use std::any::{Any, TypeId};
-
 #[macro_export]
 macro_rules! print_type {
     ($val:expr) => {{
@@ -12,9 +10,10 @@ macro_rules! print_type {
         p(&$val);
     }};
 }
+#[macro_export]
 macro_rules! is_type {
     ($val:expr, $t:ty) => {{
-        TypeId::of::<$t>() == (&$val as &dyn Any).type_id()
+        std::any::TypeId::of::<$t>() == (&$val as &dyn std::any::Any).type_id()
     }};
 }
 
