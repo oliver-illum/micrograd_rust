@@ -141,8 +141,6 @@ impl ValueWrapper {
         let topo = topological_list(&self);
         for node in topo.into_iter().rev() {
             if let Some(backward_fn) = node.0.borrow()._backward {
-                // We extract the backward function without holding a mutable borrow on node.
-                // (You might need to use std::mem::replace as shown earlier if necessary.)
                 backward_fn(&mut node.clone());
             }
         }
